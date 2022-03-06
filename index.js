@@ -6,7 +6,11 @@ const app = express();
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
-const url = 'mongodb+srv://store_user:B5lraitdQtC6ty0R@cluster0.5xvf9.mongodb.net/store_db?retryWrites=true&w=majority';
+const actionsRoute = require('./controllers/actions');
+app.use('/api', actionsRoute);
+
+
+const url = 'mongodb+srv://store_user:1234@cluster0.5xvf9.mongodb.net/store_db?retryWrites=true&w=majority';
 
 const port = 5090;
 mongoose.connect(url)

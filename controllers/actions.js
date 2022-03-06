@@ -28,3 +28,4 @@ router.post('/createMatch', (request,response)=>{
                 })
         })
 })
+module.exports = router;

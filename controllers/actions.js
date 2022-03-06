@@ -4,6 +4,35 @@ const mongoose = require('mongoose');
 const Match = require('../models/match');
 const { request, response } = require('express');
 
+//READ
+router.get('/getMatches', async(request,response)=>{
+        //Version 1
+        // try {
+        //         const matches = await Match.find(); 
+        //         return response.status(200).json({
+        //                 message: matches
+        //         })  
+        // } catch (error) {
+        //         return response.status(500).json({
+        //                 message: error
+        //         })   
+        // }
+
+        //Version 2
+        Match.find()
+        .then(results =>{
+                return response.status(200).json({
+                        message: results
+                })
+        })
+        .catch(err =>{
+                return response.status(500).json({
+                        message: err
+                })
+        })
+})
+
+//CREATE
 router.post('/createMatch', (request,response)=>{
         const {homeTeamName,awayTeamName, homeScore, awayScore, stadium, homeWin } = request.body;
         const id = mongoose.Types.ObjectId();
@@ -23,7 +52,7 @@ router.post('/createMatch', (request,response)=>{
                 })
         })
         .catch(err =>{
-                return response.status(200).json({
+                return response.status(500).json({
                         message: err
                 })
         })
